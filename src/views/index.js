@@ -1,4 +1,4 @@
 import Login from "./Login/Login"
-import Movies from "./Movies/Movies"
+import Videos from "./Videos/Videos"
 
-export { Login, Movies }
+export { Login, Videos }

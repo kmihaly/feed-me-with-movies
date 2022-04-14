@@ -1,0 +1,32 @@
+/*
+    320px — 480px: Mobile devices
+    481px — 768px: iPads, Tablets
+    769px — 1024px: Small screens, laptops
+    1025px — 1200px: Desktops, large screens
+    1201px and more —  Extra large screens, TV
+*/
+
+/* Mobile devices (480px and below) */
+@mixin for-mobile {
+    @media only screen and (max-width: 480px) { @content; }
+}
+
+/* iPads, Tablet devices (768px and below) */
+@mixin for-tablet {
+    @media only screen and (max-width: 768px) { @content; }
+}
+
+/* Small screens, laptop devices (1024px and below) */
+@mixin for-laptop {
+    @media only screen and (max-width: 1024px) { @content; }
+}
+
+/* Desktops, large screens devices (889px and below) */
+@mixin for-desktop {
+    @media only screen and (max-width: 1200px) { @content; }
+}
+
+/* Extra large screens, TV devices (1201px and above) */
+@mixin for-large {
+    @media only screen and (min-width: 1201px) { @content; }
+}

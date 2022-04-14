@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import {
     CButton,
     CCard,
@@ -8,15 +7,40 @@ import {
     CCol,
     CContainer,
     CForm,
+    CFormFeedback,
     CFormInput,
     CInputGroup,
     CInputGroupText,
     CRow,
+    CSpinner
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 
-const Login = () => {
+const getLoginData = () => {
+    const email = document.querySelector("#user-email").value
+    const password = document.querySelector("#user-password").value
+
+    return {
+        email,
+        password
+    }
+}
+
+const Login = props => {
+
+    const { errorMessage, loginLoading, loginUser, validated, setValidated } = props
+
+    const handleLogin = () => {
+        const { email, password } = getLoginData()
+        loginUser(email, password)
+    }
+
+    const handleSubmit = () => {
+        setValidated(true)
+        handleLogin()
+    }
+
     return (
         <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
             <CContainer>
@@ -25,36 +49,57 @@ const Login = () => {
                         <CCardGroup>
                             <CCard className="p-4">
                                 <CCardBody>
-                                    <CForm>
+                                    <CForm
+                                        noValidate
+                                        validated={validated}
+                                    >
                                         <h1>Login</h1>
                                         <p className="text-medium-emphasis">Sign In to your account</p>
                                         <CInputGroup className="mb-3">
                                             <CInputGroupText>
                                                 <CIcon icon={cilUser} />
                                             </CInputGroupText>
-                                            <CFormInput placeholder="Username" autoComplete="username" />
+                                            <CFormInput
+                                                autoComplete="username"
+                                                disabled={loginLoading}
+                                                id="user-email"
+                                                placeholder="Username"
+                                                required
+                                            />
+                                            <CFormFeedback invalid>Please type a valid username</CFormFeedback>
                                         </CInputGroup>
                                         <CInputGroup className="mb-4">
                                             <CInputGroupText>
                                                 <CIcon icon={cilLockLocked} />
                                             </CInputGroupText>
                                             <CFormInput
-                                                type="password"
-                                                placeholder="Password"
                                                 autoComplete="current-password"
+                                                disabled={loginLoading}
+                                                id="user-password"
+                                                placeholder="Password"
+                                                required
+                                                type="password"
                                             />
+                                            <CFormFeedback invalid>Please type a valid password</CFormFeedback>
                                         </CInputGroup>
                                         <CRow>
                                             <CCol xs={6}>
-                                                <CButton color="primary" className="px-4">
+                                                <CButton color="primary" className="px-4" onClick={handleSubmit} >
+                                                    {
+                                                        loginLoading &&
+                                                        <>
+                                                            <CSpinner component="span" size="sm" variant="grow" aria-hidden="true" />{" "}
+                                                        </>
+                                                    }
                                                     Login
                                                 </CButton>
                                             </CCol>
-                                            {/* <CCol xs={6} className="text-right">
-                                                <CButton color="link" className="px-0">
-                                                    Forgot password?
-                                                </CButton>
-                                            </CCol> */}
+                                        </CRow>
+                                        <CRow>
+                                            <CCol>
+                                                <div className={errorMessage ? "is-invalid" : ""}></div>
+                                                <CFormFeedback className={errorMessage ? "invalid-feedback" : ""}>{errorMessage}</CFormFeedback>
+                                            </CCol>
                                         </CRow>
                                     </CForm>
                                 </CCardBody>
@@ -66,11 +111,6 @@ const Login = () => {
                                         <p>
                                             This site offers you the opportunity to browse and find your favorite videos & movies, then watch them. In order to do any of these, please log in.
                                         </p>
-                                        {/* <Link to="/register">
-                                            <CButton color="primary" className="mt-3" active tabIndex={-1}>
-                                                Register Now!
-                                            </CButton>
-                                        </Link> */}
                                     </div>
                                 </CCardBody>
                             </CCard>
