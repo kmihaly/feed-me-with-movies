@@ -12,6 +12,11 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
     )
 }
 
-ErrorFallback.propTypes = {}
+ErrorFallback.propTypes = {
+    error: PropTypes.shape({
+        message: PropTypes.string.isRequired
+    }),
+    resetErrorBoundary: PropTypes.func.isRequired
+}
 
 export default ErrorFallback

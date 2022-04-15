@@ -12,7 +12,6 @@ import { cilChevronDoubleLeft, cilChevronDoubleRight, cilChevronLeft, cilChevron
 
 import PropTypes from "prop-types"
 
-
 import "./Navbar.scss"
 
 const Navbar = props => {
@@ -47,7 +46,9 @@ const Navbar = props => {
 }
 
 Navbar.propTypes = {
-
+    selectedPage: PropTypes.number.isRequired,
+    setSelectedPage: PropTypes.func.isRequired,
+    pagesNumber: PropTypes.number.isRequired
 }
 
 export default Navbar

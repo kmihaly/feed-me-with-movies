@@ -14,7 +14,7 @@ export const useApp = () => {
 
     let navigate = useNavigate()
 
-    const letUserIn = () => navigate("/movies")
+    const letUserIn = () => navigate("/videos")
 
     const clearLoginFields = () => {
         document.querySelector("#user-email").value = ""
@@ -52,7 +52,6 @@ export const useApp = () => {
             } catch (error) {
                 setLoginLoading(false)
                 refuseLoggingIn(error)
-                return
             }
         }
     }

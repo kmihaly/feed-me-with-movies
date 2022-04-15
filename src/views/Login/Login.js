@@ -20,11 +20,7 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 const getLoginData = () => {
     const email = document.querySelector("#user-email").value
     const password = document.querySelector("#user-password").value
-
-    return {
-        email,
-        password
-    }
+    return { email, password }
 }
 
 const Login = props => {
