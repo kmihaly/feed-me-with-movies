@@ -6,7 +6,7 @@ You can browse and watch videos using this app.
 1. Clone the repo
 2. In your terminal, run 'npm i' from the project folder
 3. In your terminal, run 'npm start' from the project folder
-
+4. You can login with "abc" as username and password as well
 
 # Getting Started with Create React App
 
